@@ -23,7 +23,16 @@ import javax.tools.ToolProvider;
 public final class JbxCheckCompiler {
   private JbxCheckCompiler() {}
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
+    try {
+      System.exit(run(args));
+    } catch (Exception e) {
+      System.out.print(failureJson(e.getMessage() == null ? e.toString() : e.getMessage()));
+      System.exit(1);
+    }
+  }
+
+  private static int run(String[] args) throws Exception {
     List<String> options = new ArrayList<>();
     List<String> files = new ArrayList<>();
     boolean afterSeparator = false;
@@ -80,8 +89,28 @@ public final class JbxCheckCompiler {
       field(json, "compilerOutput", compilerOut.toString());
       json.append("\n}\n");
       System.out.print(json);
-      System.exit(Boolean.TRUE.equals(ok) ? 0 : 1);
+      return Boolean.TRUE.equals(ok) ? 0 : 1;
     }
+  }
+
+  private static String failureJson(String message) {
+    StringBuilder json = new StringBuilder();
+    json.append("{\n  \"ok\": false,\n  \"diagnostics\": [\n");
+    json.append("    {");
+    field(json, "kind", "ERROR");
+    json.append(",");
+    field(json, "code", null);
+    json.append(",");
+    field(json, "file", null);
+    json.append(",");
+    json.append("\"line\": -1,");
+    json.append("\"column\": -1,");
+    field(json, "message", message);
+    json.append("}\n");
+    json.append("  ],\n");
+    field(json, "compilerOutput", "");
+    json.append("\n}\n");
+    return json.toString();
   }
 
   private static void field(StringBuilder json, String name, String value) {
