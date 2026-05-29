@@ -1,0 +1,28 @@
+{
+  "group": "dev.telegraphic.jbx",
+  "version": "0.1.0",
+  "package": "dev.telegraphic.jbx",
+  "url": "https://github.com/telegraphic-dev/jbx-utils",
+  "licenses": [
+    {
+      "name": "MIT License",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  ],
+  "developers": [
+    {
+      "name": "Telegraphic",
+      "organizationUrl": "https://github.com/telegraphic-dev"
+    }
+  ],
+  "scm": {
+    "connection": "scm:git:https://github.com/telegraphic-dev/jbx-utils.git",
+    "developerConnection": "scm:git:ssh://git@github.com/telegraphic-dev/jbx-utils.git",
+    "url": "https://github.com/telegraphic-dev/jbx-utils"
+  },
+  "java": "21",
+  "main": "src/JbxCheckCompiler.java",
+  "id": "jbx-check",
+  "name": "jbx-check",
+  "description": "Dependency-free compiler helper used by jbx check"
+}

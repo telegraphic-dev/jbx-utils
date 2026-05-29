@@ -10,7 +10,7 @@ CACHE_DIR=${JBX_CACHE_DIR:-"$ROOT/.jbx-cache"}
 rm -rf "$CLASSES" "$SAMPLE_DIR"
 mkdir -p "$CLASSES" "$SAMPLE_DIR"
 
-javac --release 21 -d "$CLASSES" "$ROOT/src/JbxCheckCompiler.java"
+javac --release 21 -d "$CLASSES" "$ROOT/jbx-check/src/JbxCheckCompiler.java"
 
 cat > "$SAMPLE_DIR/Broken.java" <<'JAVA'
 class Broken {
@@ -59,7 +59,7 @@ class Example {
 }
 JAVA
 
-"$JBX" run "$ROOT/src/JbxGraph.java" --cache-dir "$CACHE_DIR" -- dump "$SAMPLE_DIR/Example.java" > "$SAMPLE_DIR/Example.json"
+"$JBX" run "$ROOT/jbx-graph/src/JbxGraph.java" --cache-dir "$CACHE_DIR" -- dump "$SAMPLE_DIR/Example.java" > "$SAMPLE_DIR/Example.json"
 python3 - "$SAMPLE_DIR/Example.json" <<'PY'
 import json, sys
 with open(sys.argv[1], encoding="utf-8") as f:
@@ -67,6 +67,6 @@ with open(sys.argv[1], encoding="utf-8") as f:
 assert data["!"] == "com.github.javaparser.ast.CompilationUnit", data
 PY
 
-"$JBX" run "$ROOT/src/JbxGraph.java" --cache-dir "$CACHE_DIR" -- import "$SAMPLE_DIR/Example.json" > "$SAMPLE_DIR/RoundTrip.java"
+"$JBX" run "$ROOT/jbx-graph/src/JbxGraph.java" --cache-dir "$CACHE_DIR" -- import "$SAMPLE_DIR/Example.json" > "$SAMPLE_DIR/RoundTrip.java"
 grep -q 'class Example' "$SAMPLE_DIR/RoundTrip.java"
 grep -q 'String message = "hello";' "$SAMPLE_DIR/RoundTrip.java"

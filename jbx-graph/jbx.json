@@ -1,24 +1,33 @@
 {
-  "main": "src/JbxCheckCompiler.java",
   "group": "dev.telegraphic.jbx",
-  "id": "jbx-utils",
   "version": "0.1.0",
   "package": "dev.telegraphic.jbx",
-  "name": "jbx-utils",
-  "description": "Sidecar Java utilities used by jbx commands",
   "url": "https://github.com/telegraphic-dev/jbx-utils",
-  "licenses": [{"name": "MIT License", "url": "https://opensource.org/licenses/MIT"}],
-  "developers": [{"name": "Telegraphic", "organizationUrl": "https://github.com/telegraphic-dev"}],
+  "licenses": [
+    {
+      "name": "MIT License",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  ],
+  "developers": [
+    {
+      "name": "Telegraphic",
+      "organizationUrl": "https://github.com/telegraphic-dev"
+    }
+  ],
   "scm": {
     "connection": "scm:git:https://github.com/telegraphic-dev/jbx-utils.git",
     "developerConnection": "scm:git:ssh://git@github.com/telegraphic-dev/jbx-utils.git",
     "url": "https://github.com/telegraphic-dev/jbx-utils"
   },
-  "sources": ["src/JbxGraph.java"],
+  "java": "21",
+  "main": "src/JbxGraph.java",
+  "id": "jbx-graph",
+  "name": "jbx-graph",
+  "description": "JavaParser JSON graph helper used by jbx graph",
   "dependencies": [
     "com.github.javaparser:javaparser-core:3.28.1",
     "com.github.javaparser:javaparser-core-serialization:3.28.1",
     "org.eclipse.parsson:parsson:1.1.7"
-  ],
-  "java": "21"
+  ]
 }
