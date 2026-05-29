@@ -1,9 +1,6 @@
 //JAVA 21
 //DEPS org.openrewrite:rewrite-core:8.56.1
 //DEPS org.openrewrite:rewrite-java:8.56.1
-//DEPS org.openrewrite:rewrite-java-21:8.56.1
-//DEPS org.slf4j:slf4j-api:2.0.17
-//DEPS org.slf4j:slf4j-nop:2.0.17
 package dev.telegraphic.jbx.rewrite;
 
 import java.io.BufferedWriter;

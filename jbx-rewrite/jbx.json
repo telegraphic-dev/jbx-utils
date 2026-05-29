@@ -27,9 +27,6 @@
   "description": "OpenRewrite runner and recipe-discovery helper used by jbx rewrite",
   "dependencies": [
     "org.openrewrite:rewrite-core:8.56.1",
-    "org.openrewrite:rewrite-java:8.56.1",
-    "org.openrewrite:rewrite-java-21:8.56.1",
-    "org.slf4j:slf4j-api:2.0.17",
-    "org.slf4j:slf4j-nop:2.0.17"
+    "org.openrewrite:rewrite-java:8.56.1"
   ]
 }

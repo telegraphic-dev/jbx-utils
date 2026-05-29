@@ -76,9 +76,11 @@ cat > "$SAMPLE_DIR/FormatMe.java" <<'JAVA'
 class FormatMe{void main(){System.out.println("hi");}}
 JAVA
 
-"$JBX" run "$ROOT/jbx-rewrite/src/JbxRewrite.java" --cache-dir "$CACHE_DIR" -- --discover --search AutoFormat --limit 1 > "$SAMPLE_DIR/recipes.txt"
+REWRITE_RUNTIME_DEPS="org.openrewrite:rewrite-java-21:8.56.1,org.slf4j:slf4j-api:2.0.17,org.slf4j:slf4j-nop:2.0.17"
+
+"$JBX" run --deps "$REWRITE_RUNTIME_DEPS" "$ROOT/jbx-rewrite/src/JbxRewrite.java" --cache-dir "$CACHE_DIR" -- --discover --search AutoFormat --limit 1 > "$SAMPLE_DIR/recipes.txt"
 grep -q 'org.openrewrite.java.format.AutoFormat' "$SAMPLE_DIR/recipes.txt"
 
-"$JBX" run "$ROOT/jbx-rewrite/src/JbxRewrite.java" --cache-dir "$CACHE_DIR" -- --recipe org.openrewrite.java.format.AutoFormat --source "$SAMPLE_DIR/FormatMe.java" --report "$SAMPLE_DIR/rewrite" --dry-run
+"$JBX" run --deps "$REWRITE_RUNTIME_DEPS" "$ROOT/jbx-rewrite/src/JbxRewrite.java" --cache-dir "$CACHE_DIR" -- --recipe org.openrewrite.java.format.AutoFormat --source "$SAMPLE_DIR/FormatMe.java" --report "$SAMPLE_DIR/rewrite" --dry-run
 
 grep -q 'class FormatMe' "$SAMPLE_DIR/rewrite/rewrite.patch"
