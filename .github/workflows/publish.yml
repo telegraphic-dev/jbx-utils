@@ -42,6 +42,6 @@ jobs:
             --publish \
             --file jbx.json \
             --version "$VERSION" \
-            --output target/jbx-check-central-bundle.zip \
+            --output target/jbx-utils-central-bundle.zip \
             --target-dir target/publish \
             --cache-dir .jbx-cache
