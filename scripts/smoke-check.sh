@@ -2,13 +2,15 @@
 set -euo pipefail
 
 ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+JBX=${JBX:-jbx}
 CLASSES=${CLASSES:-"$ROOT/target/classes"}
 SAMPLE_DIR=${SAMPLE_DIR:-"$ROOT/target/smoke"}
+CACHE_DIR=${JBX_CACHE_DIR:-"$ROOT/.jbx-cache"}
 
 rm -rf "$CLASSES" "$SAMPLE_DIR"
 mkdir -p "$CLASSES" "$SAMPLE_DIR"
 
-javac --release 21 -d "$CLASSES" "$ROOT/src/JbxCheckCompiler.java"
+javac --release 21 -d "$CLASSES" "$ROOT/jbx-check/src/JbxCheckCompiler.java"
 
 cat > "$SAMPLE_DIR/Broken.java" <<'JAVA'
 class Broken {
@@ -47,3 +49,24 @@ fi
 printf '%s\n' "$invalid_output" | python3 -m json.tool >/dev/null
 printf '%s\n' "$invalid_output" | grep -q '"ok": false'
 printf '%s\n' "$invalid_output" | grep -q 'error: invalid flag: --definitely-not-a-javac-option'
+
+cat > "$SAMPLE_DIR/Example.java" <<'JAVA'
+class Example {
+  void main() {
+    String message = "hello";
+    IO.println(message);
+  }
+}
+JAVA
+
+"$JBX" run "$ROOT/jbx-graph/src/JbxGraph.java" --cache-dir "$CACHE_DIR" -- dump "$SAMPLE_DIR/Example.java" > "$SAMPLE_DIR/Example.json"
+python3 - "$SAMPLE_DIR/Example.json" <<'PY'
+import json, sys
+with open(sys.argv[1], encoding="utf-8") as f:
+    data = json.load(f)
+assert data["!"] == "com.github.javaparser.ast.CompilationUnit", data
+PY
+
+"$JBX" run "$ROOT/jbx-graph/src/JbxGraph.java" --cache-dir "$CACHE_DIR" -- import "$SAMPLE_DIR/Example.json" > "$SAMPLE_DIR/RoundTrip.java"
+grep -q 'class Example' "$SAMPLE_DIR/RoundTrip.java"
+grep -q 'String message = "hello";' "$SAMPLE_DIR/RoundTrip.java"
