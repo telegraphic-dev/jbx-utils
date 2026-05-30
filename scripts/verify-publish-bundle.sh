@@ -47,3 +47,4 @@ verify_project() {
 
 verify_project jbx-check dev/telegraphic/jbx/check JbxCheckCompiler 'dev/telegraphic/jbx/graph/JbxGraph.class'
 verify_project jbx-graph dev/telegraphic/jbx/graph JbxGraph 'dev/telegraphic/jbx/check/JbxCheckCompiler.class'
+verify_project jbx-rewrite dev/telegraphic/jbx/rewrite JbxRewrite 'dev/telegraphic/jbx/graph/JbxGraph.class'

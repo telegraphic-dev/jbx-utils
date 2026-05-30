@@ -7,10 +7,12 @@ Sidecar Java utilities used by `jbx` commands. Each helper is a separate Maven a
 ```text
 dev.telegraphic.jbx:jbx-check:<version>
 dev.telegraphic.jbx:jbx-graph:<version>
+dev.telegraphic.jbx:jbx-rewrite:<version>
 ```
 
 - `jbx-check` contains `dev.telegraphic.jbx.check.JbxCheckCompiler`, a dependency-free Compiler API wrapper used by `jbx check`.
 - `jbx-graph` contains `dev.telegraphic.jbx.graph.JbxGraph`, a JavaParser native JSON dump/import helper used by `jbx graph`.
+- `jbx-rewrite` contains `dev.telegraphic.jbx.rewrite.JbxRewrite`, an OpenRewrite runner and recipe-discovery helper used by `jbx rewrite`.
 
 ## Local verification
 

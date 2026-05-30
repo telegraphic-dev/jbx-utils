@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: [jbx-check, jbx-graph]
+        project: [jbx-check, jbx-graph, jbx-rewrite]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4

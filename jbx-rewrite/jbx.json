@@ -1,0 +1,32 @@
+{
+  "group": "dev.telegraphic.jbx",
+  "version": "0.1.0",
+  "package": "dev.telegraphic.jbx",
+  "url": "https://github.com/telegraphic-dev/jbx-utils",
+  "licenses": [
+    {
+      "name": "MIT License",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  ],
+  "developers": [
+    {
+      "name": "Telegraphic",
+      "organizationUrl": "https://github.com/telegraphic-dev"
+    }
+  ],
+  "scm": {
+    "connection": "scm:git:https://github.com/telegraphic-dev/jbx-utils.git",
+    "developerConnection": "scm:git:ssh://git@github.com/telegraphic-dev/jbx-utils.git",
+    "url": "https://github.com/telegraphic-dev/jbx-utils"
+  },
+  "java": "21",
+  "main": "src/JbxRewrite.java",
+  "id": "jbx-rewrite",
+  "name": "jbx-rewrite",
+  "description": "OpenRewrite runner and recipe-discovery helper used by jbx rewrite",
+  "dependencies": [
+    "org.openrewrite:rewrite-core:8.56.1",
+    "org.openrewrite:rewrite-java:8.56.1"
+  ]
+}
